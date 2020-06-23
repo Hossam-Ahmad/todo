@@ -1,0 +1,48 @@
+version: "3"
+services:
+
+    #App Service
+    app:
+        container_name: app
+        build: .
+        depends_on:
+            - mongo
+            - authentication
+            - crud
+            - search
+        ports:
+            - "8080:8080"
+
+    #Mongo Service
+    mongo:
+        image: mongo
+        container_name: mongo
+        ports:
+            - "27017:27017"
+
+    #Authentication Service
+    authentication:
+        build: ../Authentication
+        container_name: authentication
+        depends_on:
+            - mongo
+        ports:
+            - "3000:3000"
+
+    #CRUD Service
+    crud:
+        build: ../CRUD
+        container_name: crud
+        depends_on:
+            - mongo
+        ports:
+            - "3002:3002"
+
+    #Search Service
+    search:
+        build: ../Search
+        container_name: search
+        depends_on:
+            - mongo
+        ports:
+            - "3001:3001"

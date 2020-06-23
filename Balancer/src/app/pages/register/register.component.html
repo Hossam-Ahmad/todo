@@ -1,0 +1,28 @@
+<div class="container" id="container">
+    <div class="form-container sign-in-container">
+        <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+            <h1>Sign Up</h1>
+            <div class="social-container">
+                <a target="_blank" class="social"><i class="fab fa-facebook" (click)="loginfb()"></i></a>
+            </div>
+            <span>or use your account</span>
+            <input type="text" class="form-control" placeholder="Name" formControlName="name"/>
+            <input type="email" class="form-control" placeholder="Email" formControlName="email"/>
+            <input type="password" class="form-control" placeholder="Password" formControlName="password"/>
+            <button class="si" [disabled]="!registerForm.valid">Sign Up</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="form-container form-container2 sign-in-container">
+                <form [formGroup]="registerForm2" (ngSubmit)="register(registerForm2.value)">
+                    <span class="title">or use your phone</span>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="name"/>
+                    <input type="text" class="form-control" placeholder="Phone" formControlName="phone"/>
+                    <button class="si si2" [disabled]="!registerForm2.valid">Sign Up</button>
+                    <span class="login" (click)="login()">login</span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

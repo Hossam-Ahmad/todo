@@ -1,0 +1,47 @@
+version: "2"
+services:
+
+    #App Service
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: node:10
+        container_name: app
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: app
+            SERVICE_TAGS: dev
+        working_dir: /var/www
+        networks:
+            - app-network
+
+    #Nginx Service
+    webserver:
+        image: nginx:alpine
+        container_name: webserver
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - app-network
+
+    #Mongo Service
+    mongo:
+        build: .
+        ports:
+            — "8080:8080"
+        depends_on:
+            — mongo
+        mongo:
+        image: mongo
+        ports:
+            — "27017:27017"
+
+#Docker Networks
+networks:
+    app-network:
+      driver: bridge

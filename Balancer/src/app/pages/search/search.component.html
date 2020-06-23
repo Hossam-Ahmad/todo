@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="card">
+      <h3>Users</h3>
+      <input type="text" placeholder="Search .." [(ngModel)]="query" (keydown)="search()"/>
+      <div class="team">
+        <div class="member" *ngFor="let user of users;let i = index;">
+            <div class="status"></div>
+            <span class="name">{{user.name}}</span>
+            <button class="btn2" (click)="delete(i)">Delete</button>     
+            <button class="btn2" (click)="details(i)">Details</button>
+        </div>
+      </div>
+      <div class="action">
+        <button class="btn" (click)="logout()">Logout</button>
+        <button class="btn" (click)="create()">Create</button>
+      </div>
+    </div>
+  </div>
